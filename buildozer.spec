@@ -57,3 +57,4 @@ android.new_buildozer = True
 
 # Buildozer siempre debe limpiar los archivos temporales de compilación.
 allow_storage = True
+# comentario tonto
