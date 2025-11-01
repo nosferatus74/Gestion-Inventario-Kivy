@@ -20,7 +20,7 @@ source.exclude_dirs = .buildozer, .git
 version = 1.0.0
 
 # (CLAVE) Lista de requerimientos (librerías que usa tu código).
-# Kivy es esencial, y AGREGAMOS sqlite3 porque tu código lo usa.
+# Kivy es esencial, y AGREGAMOS sqlite3.
 requirements = python3, kivy==2.3.0, sqlite3
 
 # Icono de la aplicación (descomentá y reemplazá si tenés un archivo .png)
@@ -36,10 +36,10 @@ fullscreen = 0
 # Android
 # -----------------
 
-# nueva linea que acepta todo
+# (NUEVA LÍNEA CLAVE) ¡SOLUCIÓN! Acepta automáticamente las licencias del SDK/NDK
 android.accept_sdk_licenses = True
 
-# (CLAVE) Nivel API de destino (Android 8.1 - Oreo es estable, 27 es un buen target mínimo)
+# (CLAVE) Nivel API de destino (Android 7.0 - Nougat es ultra-estable)
 android.api = 24
 
 # Nivel API mínimo soportado por la app (Android 5.0 - Lollipop)
@@ -50,3 +50,10 @@ android.archs = arm64-v8a, armeabi-v7a
 
 # Versión mínima de Kivy (sugerida para estabilidad)
 android.new_buildozer = True
+
+# -----------------
+# Otros
+# -----------------
+
+# Buildozer siempre debe limpiar los archivos temporales de compilación.
+allow_storage = True
