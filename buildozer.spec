@@ -40,7 +40,7 @@ fullscreen = 0
 android.accept_sdk_licenses = True
 
 # (CLAVE) Nivel API de destino (Android 8.1 - Oreo es estable, 27 es un buen target mínimo)
-android.api = 27
+android.api = 25
 
 # Nivel API mínimo soportado por la app (Android 5.0 - Lollipop)
 android.minapi = 21
