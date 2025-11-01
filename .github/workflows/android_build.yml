@@ -1,4 +1,4 @@
-name: Compilación Android (VERSION FINAL + CLEAN)
+name: Compilación Android (VERSION FINAL ++ CLEAN)
 
 on:
   push:
@@ -19,10 +19,14 @@ jobs:
       with:
         python-version: '3.10'
         
-    - name: 3. Instalar Buildozer y Dependencias (Librerías Linux)
+    - name: 3. Instalar Buildozer y Dependencias (Librerías Linux + P4A)
       run: |
         python -m pip install --upgrade pip
-        pip install buildozer cython==0.29.34
+        # Instalar Buildozer y fijar Cython a una versión ultra-estable
+        pip install buildozer cython==0.29.33  
+        # Instalar python-for-android explícitamente para evitar FileNotFoundError
+        pip install python-for-android
+        
         sudo apt-get update
         # Paquetes esenciales para la compilación de Android
         sudo apt-get install -y \
