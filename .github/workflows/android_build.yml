@@ -1,4 +1,4 @@
-name: Compilación Android (VERSION FINAL ++ CLEAN)
+name: Compilación Android (VERSION MÁS SIMPLE Y FINAL)
 
 on:
   push:
@@ -19,13 +19,11 @@ jobs:
       with:
         python-version: '3.10'
         
-    - name: 3. Instalar Buildozer y Dependencias (Librerías Linux + P4A)
+    - name: 3. Instalar Buildozer y Dependencias
       run: |
         python -m pip install --upgrade pip
-        # Instalar Buildozer y fijar Cython a una versión ultra-estable
-        pip install buildozer cython==0.29.33  
-        # Instalar python-for-android explícitamente para evitar FileNotFoundError
-        pip install python-for-android
+        # Instalar Buildozer y fijar Cython y P4A
+        pip install buildozer cython==0.29.33 python-for-android
         
         sudo apt-get update
         # Paquetes esenciales para la compilación de Android
@@ -35,16 +33,13 @@ jobs:
           zlib1g-dev libncurses5-dev libncursesw5-dev \
           cmake
         
-    - name: 4. Limpiar Buildozer (Eliminar cache de intentos anteriores)
-      # Este paso es clave para forzar la lectura del nuevo buildozer.spec
-      run: buildozer android clean
-      
-    - name: 5. Ejecutar Buildozer y Compilar el APK
-      # Esto lee el buildozer.spec y arranca la compilación en Android.
+    - name: 4. Ejecutar Buildozer y Compilar el APK
+      # Esto lee el buildozer.spec (con API 24 y licencia aceptada) y compila.
       run: buildozer android debug
 
-    - name: 6. Subir APK (Artifact)
+    - name: 5. Subir APK (Artifact)
       uses: actions/upload-artifact@v4
       with:
         name: GestionInventario-APK-nosferatus74
         path: bin/*.apk
+
