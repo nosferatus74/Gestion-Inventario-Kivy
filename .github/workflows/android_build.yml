@@ -1,4 +1,4 @@
-name: Compilación Android (Versión 2.0 - Fix Librerías)
+name: Compilación Android (VERSION FINAL + CLEAN)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    # Usar Ubuntu 22.04, es más estable para estas librerías que la versión 'latest'
+    # Usar Ubuntu 22.04, es más estable para estas librerías.
     runs-on: ubuntu-22.04 
 
     steps:
@@ -19,23 +19,27 @@ jobs:
       with:
         python-version: '3.10'
         
-    - name: 3. Instalar Buildozer y Dependencias (¡FIX!)
-      # Usamos el paquete de desarrollo (pkg-config) y quitamos 'libtinfo5'
+    - name: 3. Instalar Buildozer y Dependencias (Librerías Linux)
       run: |
         python -m pip install --upgrade pip
         pip install buildozer cython==0.29.34
         sudo apt-get update
+        # Paquetes esenciales para la compilación de Android
         sudo apt-get install -y \
           git zip unzip openjdk-17-jdk \
           python3-pip autoconf libtool pkg-config \
           zlib1g-dev libncurses5-dev libncursesw5-dev \
           cmake
         
-    - name: 4. Ejecutar Buildozer y Compilar el APK
-      # Esto lee el buildozer.spec y arranca la compilación.
+    - name: 4. Limpiar Buildozer (Eliminar cache de intentos anteriores)
+      # Este paso es clave para forzar la lectura del nuevo buildozer.spec
+      run: buildozer android clean
+      
+    - name: 5. Ejecutar Buildozer y Compilar el APK
+      # Esto lee el buildozer.spec y arranca la compilación en Android.
       run: buildozer android debug
 
-    - name: 5. Subir APK (Artifact)
+    - name: 6. Subir APK (Artifact)
       uses: actions/upload-artifact@v4
       with:
         name: GestionInventario-APK-nosferatus74
