@@ -36,6 +36,9 @@ fullscreen = 0
 # Android
 # -----------------
 
+# nueva linea que acepta todo
+android.accept_sdk_licenses = True
+
 # (CLAVE) Nivel API de destino (Android 8.1 - Oreo es estable, 27 es un buen target mínimo)
 android.api = 27
 
